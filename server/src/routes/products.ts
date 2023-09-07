@@ -1,5 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { knex } from '../db'
+import { checkProductAndPrice } from '../middlewares/check-product-and-price'
 
 export async function productRoutes(app: FastifyInstance) {
   app.get(
@@ -13,22 +14,14 @@ export async function productRoutes(app: FastifyInstance) {
     },
   )
 
-  app.get(
-    '/products/:id',
-    {
-      preHandler: [],
-    },
-    async (req) => {
-      const product = await knex('products').select('*')
-      const getProductParamsSchema = ''
-    },
-  )
-
   app.put(
     '/products',
     {
       preHandler: [],
     },
-    async (req, res) => {},
+    async (req, res) => {
+      const dados = req.body
+      console.log(dados)
+    },
   )
 }

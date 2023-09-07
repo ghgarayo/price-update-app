@@ -1,36 +1,35 @@
-"use client";
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+'use client'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 export default function TabelaDePrecos() {
-
   interface Product {
-    code: number;
-    name: string;
-    cost_price: number;
-    sales_price: number;
+    code: number
+    name: string
+    cost_price: number
+    sales_price: number
   }
 
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get('http://localhost:3344/products');
-        setProducts(response.data);
-        setLoading(false);
+        const response = await axios.get('http://localhost:3344/products')
+        setProducts(response.data)
+        setLoading(false)
       } catch (error) {
-        console.error('Erro ao buscar dados:', error);
-        setLoading(false);
+        console.error('Erro ao buscar dados:', error)
+        setLoading(false)
       }
     }
 
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   if (loading) {
-    return <p>Carregando...</p>;
+    return <p>Carregando...</p>
   }
 
   return (
@@ -38,7 +37,7 @@ export default function TabelaDePrecos() {
       <h1 className="text-4xl mb-4">Tabela de Preços</h1>
       <table>
         <thead>
-          <tr >
+          <tr>
             <th className="px-1.5">Código</th>
             <th className="px-1.5">Nome</th>
             <th className="px-1.5">Preço de Custo</th>
@@ -50,12 +49,16 @@ export default function TabelaDePrecos() {
             <tr key={product.code}>
               <td className="px-1.5">{product.code}</td>
               <td className="px-1.5">{product.name}</td>
-              <td className="text-end px-1.5">R$ {product.cost_price.toFixed(2)}</td>
-              <td className="text-end px-1.5">R$ {product.sales_price.toFixed(2)}</td>
+              <td className="text-end px-1.5">
+                R$ {product.cost_price.toFixed(2)}
+              </td>
+              <td className="text-end px-1.5">
+                R$ {product.sales_price.toFixed(2)}
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-  );
+  )
 }
