@@ -1,6 +1,5 @@
 import { FastifyInstance } from 'fastify'
-import { knex } from './db'
-import { z } from 'zod'
+import { knex } from '../db'
 
 export async function productRoutes(app: FastifyInstance) {
   app.get(
@@ -21,9 +20,7 @@ export async function productRoutes(app: FastifyInstance) {
     },
     async (req) => {
       const product = await knex('products').select('*')
-      const getProductParamsSchema = z.object({
-        id: z.string.id(),
-      })
+      const getProductParamsSchema = ''
     },
   )
 }

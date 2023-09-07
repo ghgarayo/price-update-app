@@ -1,17 +1,15 @@
 import fastify from 'fastify'
-import { knex } from './db'
+import { env } from './env'
+import { productRoutes } from './routes/products'
 
 const app = fastify()
 
-app.get('/hello', async () => {
-  const test = await knex('products').select('*')
-  return test
-})
+app.register(productRoutes)
 
 app
   .listen({
-    port: 3333,
+    port: env.SERVER_PORT,
   })
   .then(function () {
-    console.log(`Server running`)
+    console.log(`Server running on port: ${env.SERVER_PORT}`)
   })
