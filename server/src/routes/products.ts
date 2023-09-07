@@ -23,4 +23,12 @@ export async function productRoutes(app: FastifyInstance) {
       const getProductParamsSchema = ''
     },
   )
+
+  app.put(
+    '/products',
+    {
+      preHandler: [],
+    },
+    async (req, res) => {},
+  )
 }
