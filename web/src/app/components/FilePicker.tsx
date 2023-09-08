@@ -64,7 +64,7 @@ export default function FilePicker() {
       const jsonData = JSON.stringify(csvData)
 
       axios
-        .put('http://localhost:3344/validate-products', jsonData, {
+        .post('http://localhost:3344/validate-products', jsonData, {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -95,7 +95,23 @@ export default function FilePicker() {
     }
   }
 
-  const applyChangesToPrices = () => {}
+  const applyChangesToPrices = () => {
+    const jsonData = JSON.stringify(csvData)
+    axios
+      .put('http://localhost:3344/products', jsonData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        alert('Produto(s) atualizados com sucesso!')
+        window.location.reload()
+      })
+      .catch((error) => {
+        console.error('Error sending data:', error)
+        setServerResponse('Erro ao enviar os dados para o servidor.')
+      })
+  }
 
   return (
     <div className="flex flex-col items-center pt-3 text-dark-blue-800 w-screen mb-16">
